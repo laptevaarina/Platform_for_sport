@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Glad to see you!</h1>
+    <head>
+    <title>Заголовок документа</title>
+    </head>
+    <body>
+        <input value="Sign In" type="button" onclick="location.href='{{ url_for('login') }}'" />
+        <input value="Sign Up" type="button" onclick="location.href='{{ url_for('register') }}'" />
+    </body>
+
+{% endblock %}
