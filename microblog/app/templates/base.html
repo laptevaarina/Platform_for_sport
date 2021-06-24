@@ -7,8 +7,25 @@
         {% endif %}
     </head>
     <body>
-        <div>Sportsite: <a href="{{ url_for('general') }}">Home</a></div>
+        <div>Sportsite:
+            <input value="Home" type="button" onclick="location.href='{{ url_for('general', username = current_user.username) }}'" />
+            {% if current_user.is_anonymous %}
+            <input value="Sign In" type="button" onclick="location.href='{{ url_for('login') }}'" />
+            {% else %}
+            <input value="Profile" type="button" onclick="location.href='{{ url_for('profile', username = current_user.username) }}'" />
+            <input value="Logout" type="button" onclick="location.href='{{ url_for('logout') }}'" />
+            {% endif %}
+        </div>
         <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>

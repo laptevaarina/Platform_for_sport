@@ -2,13 +2,13 @@
 
 {% block content %}
 
+    {% if current_user.is_authenticated %}
+    <h1>Hello, {{ user.username }}</h1>
+    {% for e in events %}
+    <div><p>{{ e.sport }} in <b>{{ e.body }}</b></p></div>
+    {% endfor %}
+    {% else %}
     <h1>Glad to see you!</h1>
-    <head>
-    <title>Заголовок документа</title>
-    </head>
-    <body>
-        <input value="Sign In" type="button" onclick="location.href='{{ url_for('login') }}'" />
-        <input value="Sign Up" type="button" onclick="location.href='{{ url_for('register') }}'" />
-    </body>
+    {% endif %}
 
 {% endblock %}
