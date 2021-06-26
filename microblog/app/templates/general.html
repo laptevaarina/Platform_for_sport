@@ -4,9 +4,6 @@
 
     {% if current_user.is_authenticated %}
     <h1>Hello, {{ user.username }}</h1>
-    {% else %}
-    <h1>Glad to see you!</h1>
-    {% endif %}
     <div class="container-fluid">
         <div class="row jumbotron">
             <p class="lead">Our website was created to find a team for sports!
@@ -15,5 +12,34 @@
                 There will be like-minded people!</p>
         </div>
     </div>
+    <hr>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.event.label }}<br>
+            {{ form.event(cols=32, rows=4) }}<br>
+            {% for error in form.event.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
+    {% for e in events %}
+        <p>{{ e.author.username }} suggest: <b>{{ e.body }}</b></p>
+    {% endfor %}
+    {% else %}
+    <h1>Glad to see you!</h1>
+    <div class="container-fluid">
+        <div class="row jumbotron">
+            <p class="lead">Our website was created to find a team for sports!
+                If you want to play volleyball, but you have no one to play with,
+                just write about it, specify the time and place.
+                There will be like-minded people!</p>
+        </div>
+    </div>
+    {% endif %}
+
 
 {% endblock %}

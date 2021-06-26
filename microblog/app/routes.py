@@ -7,12 +7,32 @@ from app.models import User, Events
 from werkzeug.urls import url_parse
 
 @app.route('/')
-@app.route('/general')
+@app.route('/general', methods=['GET', 'POST'])
 def general():
+    events = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Who`s want to play football today at 17:40?'
+        },
+        {
+            'author': {'username': 'Valera'},
+            'body': "Who's going for a run with me at 12:00?"
+        }
+    ]
+
+    form = EventsForm()
+    if form.validate_on_submit():
+        event = Events(body=form.event.data, user_id=current_user.id)
+        db.session.add(event)
+        db.session.commit()
+        flash('You suggested an event!')
+        return redirect(url_for('general'))
+
     if current_user.is_authenticated:
         user = User.query.filter_by(username=current_user.username).first_or_404()
-        return render_template('general.html', title='Sport web-site', user=user)
-    return render_template('general.html', title = 'Sport web-site')
+        return render_template('general.html', title='Sport web-site', user=user, events=events, form=form)
+
+    return render_template('general.html', title='Sport web-site')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -54,27 +74,11 @@ def logout():
 @app.route('/user/<username>', methods=['GET', 'POST']) #profile есть
 @login_required
 def profile(username):
-    events = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Who`s want to play football today at 17:40?'
-        },
-        {
-            'author': {'username': 'Valera'},
-            'body': "Who's going for a run with me at 12:00?"
-        }
-    ]
-    user = User.query.filter_by(username=username).first_or_404()
-    form = EventsForm()
-    if form.validate_on_submit():
-        event = Events(body=form.event.data, user_id = current_user.id)
-        events.append({'author' : {'username' : username}, 'body' : form.event.data})
-        db.session.add(event)
-        db.session.commit()
-        flash('You suggested an event!')
-        return redirect(url_for('profile', username=username))
 
-    return render_template('profile.html', user = user, events = events, form = form)
+    user = User.query.filter_by(username=username).first_or_404()
+
+
+    return render_template('profile.html', user = user)
 
 @app.before_request
 def before_request():
