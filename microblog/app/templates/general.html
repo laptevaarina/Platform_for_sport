@@ -4,11 +4,16 @@
 
     {% if current_user.is_authenticated %}
     <h1>Hello, {{ user.username }}</h1>
-    {% for e in events %}
-    <div><p>{{ e.sport }} in <b>{{ e.body }}</b></p></div>
-    {% endfor %}
     {% else %}
     <h1>Glad to see you!</h1>
     {% endif %}
+    <div class="container-fluid">
+        <div class="row jumbotron">
+            <p class="lead">Our website was created to find a team for sports!
+                If you want to play volleyball, but you have no one to play with,
+                just write about it, specify the time and place.
+                There will be like-minded people!</p>
+        </div>
+    </div>
 
 {% endblock %}

@@ -65,6 +65,7 @@ class User(UserMixin, db.Model):
 
 class Events(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    author = db.relationship('User')
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -2,27 +2,17 @@ from datetime import datetime
 from flask import render_template, flash, redirect, request, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm
-from app.models import User
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, EventsForm
+from app.models import User, Events
 from werkzeug.urls import url_parse
 
 @app.route('/')
 @app.route('/general')
 def general():
-    events = [
-        {
-            'sport' : 'football',
-            'body' : '17:40'
-        },
-        {
-            'sport': 'run',
-            'body': '12:00'
-        }
-    ]
     if current_user.is_authenticated:
         user = User.query.filter_by(username=current_user.username).first_or_404()
-        return render_template('general.html', title='Sport web-site', user=user, events = events)
-    return render_template('general.html', title = 'Sport web-site', events = events)
+        return render_template('general.html', title='Sport web-site', user=user)
+    return render_template('general.html', title = 'Sport web-site')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -61,13 +51,29 @@ def logout():
     logout_user()
     return redirect(url_for('general'))
 
-@app.route('/user/<username>') #profile есть
+@app.route('/user/<username>', methods=['GET', 'POST']) #profile есть
 @login_required
 def profile(username):
+    events = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Who`s want to play football today at 17:40?'
+        },
+        {
+            'author': {'username': 'Valera'},
+            'body': "Who's going for a run with me at 12:00?"
+        }
+    ]
     user = User.query.filter_by(username=username).first_or_404()
-    events = [ {'chel' : user, 'exercise' : 'анжумания'},
-                 {'chel' : user, 'exercise' : 'прес качат'} ]
-    form = EmptyForm()
+    form = EventsForm()
+    if form.validate_on_submit():
+        event = Events(body=form.event.data, user_id = current_user.id)
+        events.append({'author' : {'username' : username}, 'body' : form.event.data})
+        db.session.add(event)
+        db.session.commit()
+        flash('You suggested an event!')
+        return redirect(url_for('profile', username=username))
+
     return render_template('profile.html', user = user, events = events, form = form)
 
 @app.before_request

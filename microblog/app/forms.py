@@ -43,3 +43,8 @@ class EditProfileForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
+
+class EventsForm(FlaskForm):
+    event = TextAreaField('Do you want to assemble a team?', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Share')

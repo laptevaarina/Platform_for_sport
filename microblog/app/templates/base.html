@@ -1,4 +1,6 @@
 <html>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <head>
         {% if title %}
         <title>{{ title }}</title>
@@ -7,15 +9,21 @@
         {% endif %}
     </head>
     <body>
-        <div>Sportsite:
-            <input value="Home" type="button" onclick="location.href='{{ url_for('general', username = current_user.username) }}'" />
-            {% if current_user.is_anonymous %}
-            <input value="Sign In" type="button" onclick="location.href='{{ url_for('login') }}'" />
-            {% else %}
-            <input value="Profile" type="button" onclick="location.href='{{ url_for('profile', username = current_user.username) }}'" />
-            <input value="Logout" type="button" onclick="location.href='{{ url_for('logout') }}'" />
-            {% endif %}
-        </div>
+        <nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
+                <div class = "container-fluid">
+                    <ul class = "navbar-nav">
+                        <div class="p-3 mb-2 bg-primary text-white">Sportsite </div>
+                        <input value="Home" type="button" onclick="location.href='{{ url_for('general', username = current_user.username) }}'" />
+                        {% if current_user.is_anonymous %}
+                        <input value="Sign In" type="button" onclick="location.href='{{ url_for('login') }}'" />
+                        {% else %}
+                        <input value="Profile" type="button" onclick="location.href='{{ url_for('profile', username = current_user.username) }}'" />
+                        <input value="Logout" type="button" onclick="location.href='{{ url_for('logout') }}'" />
+                        {% endif %}
+                    </ul>
+                </div>
+        </nav>
+
         <hr>
         {% with messages = get_flashed_messages() %}
         {% if messages %}

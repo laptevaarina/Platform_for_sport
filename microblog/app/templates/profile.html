@@ -28,11 +28,24 @@
                 {% endif %}
             </td>
         </tr>
-
     </table>
     <hr>
+    {% if form %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.event.label }}<br>
+            {{ form.event(cols=32, rows=4) }}<br>
+            {% for error in form.event.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% endif %}
     {% for e in events %}
-        {% include '_post.html' %}
+        <p>{{ e.author.username }} suggest: <b>{{ e.body }}</b></p>
     {% endfor %}
+
 
 {% endblock %}

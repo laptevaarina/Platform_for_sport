@@ -1,6 +1,11 @@
 <table>
   <tr valigin = "top">
-    <td><img src="{{ e.chel.avatar(36) }}"></td>
-    <td>{{ e.chel.username }} do: <b>{{ e.exercise }}</b></td>
+    <td><img src="{{ e.author.avatar(36) }}"></td>
+    <td>
+      <a href="{{ url_for('profile', username=e.author.username) }}">
+        {{ e.author.username }}
+      </a>
+      suggest: <br>{{ e.body }}
+    </td>
   </tr>
 </table>
