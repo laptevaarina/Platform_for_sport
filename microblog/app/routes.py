@@ -6,19 +6,10 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, E
 from app.models import User, Events
 from werkzeug.urls import url_parse
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/general', methods=['GET', 'POST'])
 def general():
-    events = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Who`s want to play football today at 17:40?'
-        },
-        {
-            'author': {'username': 'Valera'},
-            'body': "Who's going for a run with me at 12:00?"
-        }
-    ]
+    events = Events.query.order_by(Events.timestamp).all()[-3:]
 
     form = EventsForm()
     if form.validate_on_submit():

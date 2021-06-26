@@ -1,2 +1,33 @@
 2021-06-26 16:23:23,210 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
 2021-06-26 16:28:10,421 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 16:59:54,212 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:01:08,858 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:04:07,615 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:04:12,984 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:06:09,095 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:06:25,423 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:07:41,571 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:10:24,059 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:11:12,069 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:11:55,074 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:14:34,601 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:30:25,208 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:31:42,939 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
+2021-06-26 17:31:46,008 ERROR: Exception on / [GET] [in C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Arina\Anaconda3\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Arina\python_git\Platform_for_sport\microblog\app\routes.py", line 12, in general
+    events = Events.query.order_by(Events.timestamp).all().reverse()[-3:]
+TypeError: 'NoneType' object is not subscriptable
+2021-06-26 17:32:41,479 INFO: Microblog startup [in C:\Users\Arina\python_git\Platform_for_sport\microblog\app\__init__.py:45]
